@@ -1,0 +1,29 @@
+services:
+  psql:
+    container_name: psql
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./dotenv_files/.env
+    # É recomendável expor a porta se for acessar do seu PC (DBeaver/pgAdmin)
+    ports:
+      - "5432:5432"
+
+  djangoapp:
+    build: 
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./djangoapp:/djangoapp
+      - ./data/web/static:/data/web/static
+      - ./data/web/media:/data/web/media
+    env_file:
+      - ./dotenv_files/.env
+    depends_on:
+      - psql
+
+# Esta seção é obrigatória para definir o volume nomeado usado no serviço psql
+volumes:
+  postgres_data:
