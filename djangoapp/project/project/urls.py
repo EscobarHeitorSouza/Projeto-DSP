@@ -21,9 +21,15 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
+
+from django.contrib import admin
+from django.urls import path, include  # Certifique-se de importar o 'include'
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Encaminha as requisições para o urls.py do seu app
+    path('eletropostos/', include('eletropostos.urls')), 
 ]
-
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

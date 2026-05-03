@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'eletropostos',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
             ],
         },
     },
@@ -83,12 +85,12 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('DB_ENGINE', 'change-me'),
-        'NAME': os.getenv('POSTGRES_DB', 'change-me'),
-        'USER': os.getenv('POSTGRES_USER', 'change-me'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'change-me'),
-        'HOST': os.getenv('POSTGRES_HOST', 'change-me'),
-        'PORT': os.getenv('POSTGRES_PORT', 'change-me'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('POSTGRES_DB', 'postgres'),
+        'USER': os.getenv('POSTGRES_USER', 'postgres'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'postgres'),
+        'HOST': 'psql',  # Nome do serviço no docker-compose
+        'PORT': '5432',
     }
 }
 
